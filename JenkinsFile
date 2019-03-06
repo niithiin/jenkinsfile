@@ -1,12 +1,15 @@
-node {
+pipeline
+{
+agent any
+stages {
     
     stage ('1-git') {
         git changelog: false, poll: false, url: 'https://github.com/niithiin/time_tracker.git'
     }
      stage ('2-mvn') {
          
-         def mvn_var = tool name: 'm1', type: 'maven' 
-         sh "${mvn_var}/bin/mvn clean package"
+         def m1 = tool name: 'm1', type: 'maven' 
+         sh "${m1}/bin/mvn clean package"
         
      }
      stage('3-Deploy to Tomcat'){
@@ -16,4 +19,5 @@ node {
          sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.117 sudo cp /home/ec2-user/*.war /opt/tom7/webapps"
       }
    }
+}
 }
