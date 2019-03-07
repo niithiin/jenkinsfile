@@ -14,7 +14,7 @@ stage('3-deploy2tomcat') {
     sshagent(['tomid']) {
         
         sh "scp -o StrictHostKeyChecking=no web/target/*.war ec2-user@172.31.17.117:~"
-        sh "ssh -o StrictHostKeyChecking=no  ec2-user@172.31.17.117 sudo cp /home/ec2-user/*.war /opt/tom7/webapps"
+        sh "ssh -o StrictHostKeyChecking=no  ec2-user@13.233.166.35 sudo cp /home/ec2-user/*.war /opt/tom7/webapps"
   
 }
     
